@@ -102,7 +102,6 @@
     background: var(--bg-secondary);
     border: 0.5px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    color: var(--text-tertiary);
     font-size: 18px;
   }
 
@@ -137,7 +136,7 @@
     border-radius: var(--radius-lg);
     padding: 1.25rem;
   }
-  .ff-card-icon { font-size: 22px; color: var(--text-secondary); margin-bottom: 0.75rem; }
+  .ff-card-icon { font-size: 22px; margin-bottom: 0.75rem; }
   .ff-card-title { font-size: 14px; font-weight: 500; margin-bottom: 0.4rem; }
   .ff-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
   .ff-price { font-size: 13px; font-weight: 500; margin-top: 0.75rem; }
@@ -151,8 +150,12 @@
     line-height: 1.6;
   }
 
-  /* Icons using unicode fallback since no CDN */
-  .icon::before { display: inline-block; width: 22px; text-align: center; }
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-tertiary);
+    font-size: 13px;
+  }
 </style>
 </head>
 <body>
@@ -170,259 +173,8 @@
       <span class="section-num">01</span>
       <span class="section-title">Продукты</span>
     </div>
-
-    <div class="tabs" id="tabs">
-      <button class="tab-btn active" data-tab="lubricant">Лубрикант</button>
-      <button class="tab-btn" data-tab="hydro-oil">Гидрофильное масло</button>
-      <button class="tab-btn" data-tab="hydro-balm">Гидрофильный бальзам</button>
-      <button class="tab-btn" data-tab="foam">Пенка для умывания</button>
-      <button class="tab-btn" data-tab="spray">Спрей для волос</button>
-    </div>
-
-    <!-- ЛУБРИКАНТ -->
-    <div class="tab-panel active" id="tab-lubricant">
-      <div class="price-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:60px"></th>
-              <th>Название продукта</th>
-              <th class="price-col" style="width:110px">от 1 000 шт.</th>
-              <th class="price-col" style="width:110px">от 5 000 шт.</th>
-              <th class="price-col" style="width:110px">от 10 000 шт.</th>
-              <th style="width:140px">Тара</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="photo-thumb">💧</div></td>
-              <td>Лубрикант водный классический <span class="tag tag-pop">Хит</span></td>
-              <td class="price-cell"><strong>185 ₽</strong></td>
-              <td class="price-cell">160 ₽</td>
-              <td class="price-cell">140 ₽</td>
-              <td><span class="pkg-badge">Флакон 100 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💧</div></td>
-              <td>Лубрикант водный с алоэ вера</td>
-              <td class="price-cell"><strong>195 ₽</strong></td>
-              <td class="price-cell">168 ₽</td>
-              <td class="price-cell">148 ₽</td>
-              <td><span class="pkg-badge">Флакон 100 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💧</div></td>
-              <td>Лубрикант силиконовый длительного действия</td>
-              <td class="price-cell"><strong>220 ₽</strong></td>
-              <td class="price-cell">195 ₽</td>
-              <td class="price-cell">172 ₽</td>
-              <td><span class="pkg-badge">Флакон 150 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💧</div></td>
-              <td>Лубрикант гибридный <span class="tag tag-new">Новинка</span></td>
-              <td class="price-cell"><strong>240 ₽</strong></td>
-              <td class="price-cell">210 ₽</td>
-              <td class="price-cell">185 ₽</td>
-              <td><span class="pkg-badge">Туба 80 мл</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ГИДРОФИЛЬНОЕ МАСЛО -->
-    <div class="tab-panel" id="tab-hydro-oil">
-      <div class="price-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:60px"></th>
-              <th>Название продукта</th>
-              <th class="price-col" style="width:110px">от 1 000 шт.</th>
-              <th class="price-col" style="width:110px">от 5 000 шт.</th>
-              <th class="price-col" style="width:110px">от 10 000 шт.</th>
-              <th style="width:140px">Тара</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="photo-thumb">🧴</div></td>
-              <td>Гидрофильное масло классическое <span class="tag tag-pop">Хит</span></td>
-              <td class="price-cell"><strong>210 ₽</strong></td>
-              <td class="price-cell">180 ₽</td>
-              <td class="price-cell">158 ₽</td>
-              <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">🧴</div></td>
-              <td>Гидрофильное масло с экстрактом ромашки</td>
-              <td class="price-cell"><strong>225 ₽</strong></td>
-              <td class="price-cell">195 ₽</td>
-              <td class="price-cell">170 ₽</td>
-              <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">🧴</div></td>
-              <td>Гидрофильное масло для чувствительной кожи</td>
-              <td class="price-cell"><strong>235 ₽</strong></td>
-              <td class="price-cell">205 ₽</td>
-              <td class="price-cell">178 ₽</td>
-              <td><span class="pkg-badge">Флакон 200 мл</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ГИДРОФИЛЬНЫЙ БАЛЬЗАМ -->
-    <div class="tab-panel" id="tab-hydro-balm">
-      <div class="price-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:60px"></th>
-              <th>Название продукта</th>
-              <th class="price-col" style="width:110px">от 1 000 шт.</th>
-              <th class="price-col" style="width:110px">от 5 000 шт.</th>
-              <th class="price-col" style="width:110px">от 10 000 шт.</th>
-              <th style="width:140px">Тара</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="photo-thumb">💊</div></td>
-              <td>Гидрофильный бальзам для губ <span class="tag tag-pop">Хит</span></td>
-              <td class="price-cell"><strong>145 ₽</strong></td>
-              <td class="price-cell">125 ₽</td>
-              <td class="price-cell">108 ₽</td>
-              <td><span class="pkg-badge">Стик 10 г</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💊</div></td>
-              <td>Гидрофильный бальзам с SPF 30</td>
-              <td class="price-cell"><strong>175 ₽</strong></td>
-              <td class="price-cell">150 ₽</td>
-              <td class="price-cell">132 ₽</td>
-              <td><span class="pkg-badge">Стик 10 г</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💊</div></td>
-              <td>Бальзам для тела очищающий <span class="tag tag-new">Новинка</span></td>
-              <td class="price-cell"><strong>260 ₽</strong></td>
-              <td class="price-cell">228 ₽</td>
-              <td class="price-cell">200 ₽</td>
-              <td><span class="pkg-badge">Банка 200 мл</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ПЕНКА -->
-    <div class="tab-panel" id="tab-foam">
-      <div class="price-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:60px"></th>
-              <th>Название продукта</th>
-              <th class="price-col" style="width:110px">от 1 000 шт.</th>
-              <th class="price-col" style="width:110px">от 5 000 шт.</th>
-              <th class="price-col" style="width:110px">от 10 000 шт.</th>
-              <th style="width:140px">Тара</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="photo-thumb">🫧</div></td>
-              <td>Пенка для умывания увлажняющая <span class="tag tag-pop">Хит</span></td>
-              <td class="price-cell"><strong>190 ₽</strong></td>
-              <td class="price-cell">165 ₽</td>
-              <td class="price-cell">145 ₽</td>
-              <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">🫧</div></td>
-              <td>Пенка для умывания с кислотами</td>
-              <td class="price-cell"><strong>215 ₽</strong></td>
-              <td class="price-cell">185 ₽</td>
-              <td class="price-cell">163 ₽</td>
-              <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">🫧</div></td>
-              <td>Пенка для умывания для чувствительной кожи</td>
-              <td class="price-cell"><strong>205 ₽</strong></td>
-              <td class="price-cell">178 ₽</td>
-              <td class="price-cell">155 ₽</td>
-              <td><span class="pkg-badge">Флакон-помпа 100 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">🫧</div></td>
-              <td>Пенка очищающая с niacinamide <span class="tag tag-new">Новинка</span></td>
-              <td class="price-cell"><strong>230 ₽</strong></td>
-              <td class="price-cell">200 ₽</td>
-              <td class="price-cell">175 ₽</td>
-              <td><span class="pkg-badge">Флакон-помпа 200 мл</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- СПРЕЙ -->
-    <div class="tab-panel" id="tab-spray">
-      <div class="price-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:60px"></th>
-              <th>Название продукта</th>
-              <th class="price-col" style="width:110px">от 1 000 шт.</th>
-              <th class="price-col" style="width:110px">от 5 000 шт.</th>
-              <th class="price-col" style="width:110px">от 10 000 шт.</th>
-              <th style="width:140px">Тара</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="photo-thumb">💨</div></td>
-              <td>Спрей для волос термозащита <span class="tag tag-pop">Хит</span></td>
-              <td class="price-cell"><strong>175 ₽</strong></td>
-              <td class="price-cell">150 ₽</td>
-              <td class="price-cell">132 ₽</td>
-              <td><span class="pkg-badge">Спрей 200 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💨</div></td>
-              <td>Спрей-кондиционер несмываемый</td>
-              <td class="price-cell"><strong>195 ₽</strong></td>
-              <td class="price-cell">168 ₽</td>
-              <td class="price-cell">148 ₽</td>
-              <td><span class="pkg-badge">Спрей 250 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💨</div></td>
-              <td>Спрей для объёма у корней <span class="tag tag-new">Новинка</span></td>
-              <td class="price-cell"><strong>188 ₽</strong></td>
-              <td class="price-cell">162 ₽</td>
-              <td class="price-cell">142 ₽</td>
-              <td><span class="pkg-badge">Спрей 150 мл</span></td>
-            </tr>
-            <tr>
-              <td><div class="photo-thumb">💨</div></td>
-              <td>Спрей для блеска и гладкости</td>
-              <td class="price-cell"><strong>185 ₽</strong></td>
-              <td class="price-cell">158 ₽</td>
-              <td class="price-cell">138 ₽</td>
-              <td><span class="pkg-badge">Спрей 200 мл</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
+    <div class="tabs" id="tabs"></div>
+    <div id="products-container"><div class="loading">Загрузка данных...</div></div>
     <p class="note">* Цены указаны без НДС. В стоимость включены: состав, производство, этикетка. Упаковка оплачивается отдельно.</p>
   </div>
 
@@ -432,44 +184,7 @@
       <span class="section-num">02</span>
       <span class="section-title">Фулфилмент</span>
     </div>
-    <div class="fulfillment-grid">
-      <div class="ff-card">
-        <div class="ff-card-icon">📦</div>
-        <div class="ff-card-title">Приёмка и хранение</div>
-        <div class="ff-card-desc">Приём товара, проверка качества, размещение на складе с адресным хранением</div>
-        <div class="ff-price">от 8 ₽ / ед. в мес.</div>
-      </div>
-      <div class="ff-card">
-        <div class="ff-card-icon">🏷️</div>
-        <div class="ff-card-title">Маркировка и стикеровка</div>
-        <div class="ff-card-desc">Нанесение штрихкодов, честного знака (CRPT), артикулов маркетплейсов</div>
-        <div class="ff-price">от 4 ₽ / ед.</div>
-      </div>
-      <div class="ff-card">
-        <div class="ff-card-icon">🗃️</div>
-        <div class="ff-card-title">Упаковка и комплектация</div>
-        <div class="ff-card-desc">Сборка заказов, упаковка в коробки, стрейч-плёнку, термопакеты. Формирование наборов</div>
-        <div class="ff-price">от 12 ₽ / ед.</div>
-      </div>
-      <div class="ff-card">
-        <div class="ff-card-icon">🏪</div>
-        <div class="ff-card-title">Отгрузка на маркетплейсы</div>
-        <div class="ff-card-desc">Подготовка поставок на Wildberries, Ozon, Яндекс Маркет: документы, паллетирование, сдача</div>
-        <div class="ff-price">от 18 ₽ / ед.</div>
-      </div>
-      <div class="ff-card">
-        <div class="ff-card-icon">↩️</div>
-        <div class="ff-card-title">Обработка возвратов</div>
-        <div class="ff-card-desc">Приёмка, сортировка и переупаковка возвратов от покупателей и маркетплейсов</div>
-        <div class="ff-price">от 25 ₽ / ед.</div>
-      </div>
-      <div class="ff-card">
-        <div class="ff-card-icon">📋</div>
-        <div class="ff-card-title">Декларирование и сертификация</div>
-        <div class="ff-card-desc">Помощь в оформлении деклараций соответствия, нотификаций и разрешительной документации</div>
-        <div class="ff-price">по запросу</div>
-      </div>
-    </div>
+    <div class="fulfillment-grid" id="fulfillment-container"><div class="loading">Загрузка данных...</div></div>
     <p class="note">* Минимальный объём — 500 ед. в месяц. При объёме свыше 10 000 ед./мес. предоставляется индивидуальное коммерческое предложение.</p>
   </div>
 
@@ -479,77 +194,182 @@
       <span class="section-num">03</span>
       <span class="section-title">Логистика</span>
     </div>
-    <div class="price-table-wrap">
-      <table style="table-layout:auto;">
-        <thead>
-          <tr>
-            <th>Направление</th>
-            <th>Способ</th>
-            <th>Срок</th>
-            <th class="price-col">Стоимость</th>
-            <th>Условие</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Москва и МО</td>
-            <td>Курьер до двери</td>
-            <td>1–2 дня</td>
-            <td class="price-cell"><strong>350 ₽</strong></td>
-            <td><span class="pkg-badge">до 30 кг</span></td>
-          </tr>
-          <tr>
-            <td>Москва и МО</td>
-            <td>Самовывоз со склада</td>
-            <td>—</td>
-            <td class="price-cell"><strong>Бесплатно</strong></td>
-            <td><span class="pkg-badge">любой объём</span></td>
-          </tr>
-          <tr>
-            <td>Россия (регионы)</td>
-            <td>СДЭК / Boxberry</td>
-            <td>3–7 дней</td>
-            <td class="price-cell"><strong>от 450 ₽</strong></td>
-            <td><span class="pkg-badge">до 30 кг</span></td>
-          </tr>
-          <tr>
-            <td>Россия (регионы)</td>
-            <td>Транспортная компания</td>
-            <td>5–14 дней</td>
-            <td class="price-cell"><strong>по тарифу ТК</strong></td>
-            <td><span class="pkg-badge">паллеты / борт</span></td>
-          </tr>
-          <tr>
-            <td>WB / Ozon / ЯМ</td>
-            <td>Прямая поставка на склад МП</td>
-            <td>2–5 дней</td>
-            <td class="price-cell"><strong>от 2 500 ₽</strong></td>
-            <td><span class="pkg-badge">за поставку</span></td>
-          </tr>
-          <tr>
-            <td>Казахстан / Беларусь</td>
-            <td>Международная доставка</td>
-            <td>7–14 дней</td>
-            <td class="price-cell"><strong>по запросу</strong></td>
-            <td><span class="pkg-badge">от 1 000 ед.</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="price-table-wrap" id="logistics-container"><div class="loading">Загрузка данных...</div></div>
     <p class="note">* Сроки и стоимость доставки могут варьироваться в зависимости от веса, габаритов и удалённости региона.</p>
   </div>
 
 </div>
 
 <script>
-  document.getElementById('tabs').addEventListener('click', function(e) {
-    const btn = e.target.closest('.tab-btn');
-    if (!btn) return;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSx9GS3K991T2KZ7uQhWAAIHFqJrseB3wow3d_dsY5dlhe-X--irFjmeGOAUtpX-l6V5sGN9RnAssOG/pub?output=csv';
+
+const ICONS = {
+  'Лубрикант': '💧',
+  'Гидрофильное масло': '🧴',
+  'Гидрофильный бальзам': '💊',
+  'Пенка для умывания': '🫧',
+  'Спрей для волос': '💨',
+};
+
+const FF_ICONS = ['📦','🏷️','🗃️','🏪','↩️','📋'];
+const FF_DESC = [
+  'Приём товара, проверка качества, размещение на складе с адресным хранением',
+  'Нанесение штрихкодов, честного знака (CRPT), артикулов маркетплейсов',
+  'Сборка заказов, упаковка в коробки, стрейч-плёнку, термопакеты. Формирование наборов',
+  'Подготовка поставок на Wildberries, Ozon, Яндекс Маркет: документы, паллетирование, сдача',
+  'Приёмка, сортировка и переупаковка возвратов от покупателей и маркетплейсов',
+  'Помощь в оформлении деклараций соответствия, нотификаций и разрешительной документации'
+];
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  return lines.map(line => {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQuotes = !inQuotes; }
+      else if (line[i] === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
+      else { current += line[i]; }
+    }
+    result.push(current.trim());
+    return result;
   });
+}
+
+function formatPrice(val) {
+  if (!val) return '—';
+  if (isNaN(val)) return val;
+  return val + ' ₽';
+}
+
+function buildProductTable(rows, category) {
+  const icon = ICONS[category] || '📦';
+  let html = `<div class="price-table-wrap"><table>
+    <thead><tr>
+      <th style="width:60px"></th>
+      <th>Название продукта</th>
+      <th class="price-col" style="width:110px">от 1 000 шт.</th>
+      <th class="price-col" style="width:110px">от 5 000 шт.</th>
+      <th class="price-col" style="width:110px">от 10 000 шт.</th>
+      <th style="width:140px">Тара</th>
+    </tr></thead><tbody>`;
+
+  rows.forEach(r => {
+    const name = r[2] || '';
+    const p1 = formatPrice(r[3]);
+    const p2 = formatPrice(r[4]);
+    const p3 = formatPrice(r[5]);
+    const pkg = r[6] || '';
+    const badge = (r[7] || '').trim();
+    let badgeHtml = '';
+    if (badge === 'Хит') badgeHtml = '<span class="tag tag-pop">Хит</span>';
+    if (badge === 'Новинка') badgeHtml = '<span class="tag tag-new">Новинка</span>';
+
+    html += `<tr>
+      <td><div class="photo-thumb">${icon}</div></td>
+      <td>${name}${badgeHtml}</td>
+      <td class="price-cell"><strong>${p1}</strong></td>
+      <td class="price-cell">${p2}</td>
+      <td class="price-cell">${p3}</td>
+      <td><span class="pkg-badge">${pkg}</span></td>
+    </tr>`;
+  });
+
+  html += '</tbody></table></div>';
+  return html;
+}
+
+async function loadData() {
+  try {
+    const resp = await fetch(CSV_URL);
+    const text = await resp.text();
+    const rows = parseCSV(text).slice(1).filter(r => r[0] && r[0].trim());
+
+    const products = {};
+    const fulfillment = [];
+    const logistics = [];
+
+    rows.forEach(r => {
+      const section = (r[0] || '').trim();
+      if (section === 'ПРОДУКТЫ') {
+        const cat = (r[1] || '').trim();
+        if (cat) {
+          if (!products[cat]) products[cat] = [];
+          products[cat].push(r);
+        }
+      } else if (section === 'ФУЛФИЛМЕНТ') {
+        const name = (r[2] || '').trim();
+        if (name && name !== 'УСЛУГА') fulfillment.push(r);
+      } else if (section === 'ЛОГИСТИКА') {
+        const dir = (r[2] || '').trim();
+        if (dir && dir !== 'НАПРАВЛЕНИЕ') logistics.push(r);
+      }
+    });
+
+    // Render product tabs
+    const tabsEl = document.getElementById('tabs');
+    const containerEl = document.getElementById('products-container');
+    tabsEl.innerHTML = '';
+    containerEl.innerHTML = '';
+
+    Object.keys(products).forEach((cat, i) => {
+      const tabId = 'tab-' + i;
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+      btn.textContent = cat;
+      btn.dataset.tab = tabId;
+      tabsEl.appendChild(btn);
+
+      const panel = document.createElement('div');
+      panel.className = 'tab-panel' + (i === 0 ? ' active' : '');
+      panel.id = tabId;
+      panel.innerHTML = buildProductTable(products[cat], cat);
+      containerEl.appendChild(panel);
+    });
+
+    tabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+
+    // Render fulfillment
+    document.getElementById('fulfillment-container').innerHTML = fulfillment.map((r, i) => `
+      <div class="ff-card">
+        <div class="ff-card-icon">${FF_ICONS[i] || '📦'}</div>
+        <div class="ff-card-title">${r[2]}</div>
+        <div class="ff-card-desc">${FF_DESC[i] || ''}</div>
+        <div class="ff-price">${r[3]}</div>
+      </div>`).join('');
+
+    // Render logistics
+    document.getElementById('logistics-container').innerHTML = `
+      <table style="table-layout:auto;">
+        <thead><tr>
+          <th>Направление</th><th>Способ</th><th>Срок</th>
+          <th class="price-col">Стоимость</th><th>Условие</th>
+        </tr></thead>
+        <tbody>${logistics.map(r => `<tr>
+          <td>${r[2]}</td>
+          <td>${r[3]}</td>
+          <td>${r[4]}</td>
+          <td class="price-cell"><strong>${isNaN(r[5]) ? r[5] : r[5] + ' ₽'}</strong></td>
+          <td><span class="pkg-badge">${r[6] || ''}</span></td>
+        </tr>`).join('')}</tbody>
+      </table>`;
+
+  } catch(e) {
+    console.error(e);
+    document.getElementById('products-container').innerHTML =
+      '<div class="loading">Ошибка загрузки. Проверьте доступ к таблице.</div>';
+  }
+}
+
+loadData();
 </script>
 </body>
 </html>
