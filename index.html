@@ -1,293 +1,167 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Прайс-лист — Контрактное производство косметики</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прайс-лист — Контрактное производство косметики</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg: #ffffff;
-      --bg-secondary: #f6f5f2;
-      --bg-tertiary: #f0ede8;
-      --text: #1a1a18;
-      --text-secondary: #5f5e5a;
-      --text-tertiary: #9a9890;
-      --border: rgba(0,0,0,0.10);
-      --border-md: rgba(0,0,0,0.18);
-      --accent: #1a1a18;
-      --radius-md: 8px;
-      --radius-lg: 14px;
-      --font: 'Manrope', sans-serif;
-    }
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f5f4f1;
+    --text: #1a1a18;
+    --text-secondary: #6b6b66;
+    --text-tertiary: #9e9e98;
+    --border: rgba(0,0,0,0.1);
+    --border-secondary: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
 
-    body {
-      font-family: var(--font);
-      background: var(--bg-tertiary);
-      color: var(--text);
-      min-height: 100vh;
-    }
+  body {
+    font-family: 'Geologica', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
 
-    .site {
-      max-width: 1020px;
-      margin: 0 auto;
-      padding: 0 2rem 5rem;
-    }
+  .site { max-width: 980px; margin: 0 auto; padding: 0 2rem 5rem; }
 
-    /* HERO */
-    .hero {
-      padding: 3.5rem 0 2.5rem;
-      border-bottom: 0.5px solid var(--border-md);
-      margin-bottom: 3rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .hero-left {}
-    .hero-label {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 0.6rem;
-    }
-    .hero h1 {
-      font-size: 32px;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.2;
-    }
-    .hero p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-top: 0.4rem;
-    }
-    .hero-contact {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-align: right;
-      line-height: 1.8;
-    }
-    .hero-contact a { color: var(--text); text-decoration: none; }
-    .hero-contact a:hover { text-decoration: underline; }
+  .hero {
+    padding: 3.5rem 0 2rem;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 { font-size: 32px; font-weight: 500; line-height: 1.2; }
+  .hero p { font-size: 15px; color: var(--text-secondary); margin-top: 0.5rem; }
 
-    /* SECTIONS */
-    .section { margin-bottom: 3.5rem; }
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.75rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 0.5px solid var(--border-md);
-    }
-    .section-num {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--text-tertiary);
-      letter-spacing: 0.12em;
-    }
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--text);
-    }
+  .section { margin-bottom: 3.5rem; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .section-num { font-size: 11px; font-weight: 500; color: var(--text-tertiary); letter-spacing: 0.1em; }
+  .section-title { font-size: 20px; font-weight: 500; }
 
-    /* TABS */
-    .tabs {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-    .tab-btn {
-      font-family: var(--font);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 7px 16px;
-      border-radius: 20px;
-      border: 0.5px solid var(--border-md);
-      background: var(--bg);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .tab-btn:hover {
-      background: var(--bg-secondary);
-      color: var(--text);
-    }
-    .tab-btn.active {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
-    }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tab-btn {
+    font-size: 13px;
+    font-family: inherit;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border-secondary);
+    background: var(--bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { background: var(--bg-secondary); color: var(--text); }
+  .tab-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-    /* TABLES */
-    .table-wrap {
-      background: var(--bg);
-      border-radius: var(--radius-lg);
-      border: 0.5px solid var(--border);
-      overflow: hidden;
-    }
-    .price-table-scroll { overflow-x: auto; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13.5px;
-    }
-    thead tr {
-      background: var(--bg-secondary);
-      border-bottom: 0.5px solid var(--border-md);
-    }
-    th {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      padding: 11px 16px;
-      text-align: left;
-      white-space: nowrap;
-    }
-    th.r { text-align: right; }
-    td {
-      padding: 14px 16px;
-      vertical-align: middle;
-      color: var(--text);
-    }
-    td.r {
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-      color: var(--text-secondary);
-    }
-    td.r strong { color: var(--text); font-weight: 600; }
-    tbody tr {
-      border-bottom: 0.5px solid var(--border);
-      transition: background 0.1s;
-    }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--bg-secondary); }
+  .price-table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { border-bottom: 0.5px solid var(--border-secondary); }
+  th {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0 12px 10px;
+    text-align: left;
+  }
+  th.price-col { text-align: right; }
+  td { padding: 14px 12px; vertical-align: middle; }
+  td.price-cell { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  td.price-cell strong { color: var(--text); font-weight: 500; }
+  tbody tr { border-bottom: 0.5px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-secondary); }
 
-    .photo-thumb {
-      width: 46px;
-      height: 46px;
-      border-radius: var(--radius-md);
-      background: var(--bg-secondary);
-      border: 0.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-tertiary);
-      font-size: 20px;
-    }
+  .photo-thumb {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-tertiary);
+    font-size: 18px;
+  }
 
-    .pkg-badge {
-      font-size: 11px;
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      padding: 3px 9px;
-      border-radius: 10px;
-      display: inline-block;
-      white-space: nowrap;
-    }
+  .pkg-badge {
+    font-size: 11px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 3px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    white-space: nowrap;
+  }
 
-    .tag {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 8px;
-      display: inline-block;
-      letter-spacing: 0.04em;
-      margin-left: 6px;
-      vertical-align: middle;
-    }
-    .tag-pop { background: #EEEDFE; color: #3C3489; }
-    .tag-new { background: #E1F5EE; color: #0F6E56; }
+  .tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .tag-new { background: #E1F5EE; color: #0F6E56; }
+  .tag-pop { background: #EEEDFE; color: #3C3489; }
 
-    /* FULFILLMENT */
-    .ff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-    }
-    .ff-card {
-      background: var(--bg);
-      border-radius: var(--radius-lg);
-      border: 0.5px solid var(--border);
-      padding: 1.25rem;
-    }
-    .ff-icon {
-      font-size: 22px;
-      color: var(--text-secondary);
-      margin-bottom: 0.75rem;
-    }
-    .ff-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-    }
-    .ff-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-    .ff-price {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 0.9rem;
-      padding-top: 0.75rem;
-      border-top: 0.5px solid var(--border);
-    }
+  .fulfillment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .ff-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+  }
+  .ff-card-icon { font-size: 22px; color: var(--text-secondary); margin-bottom: 0.75rem; }
+  .ff-card-title { font-size: 14px; font-weight: 500; margin-bottom: 0.4rem; }
+  .ff-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .ff-price { font-size: 13px; font-weight: 500; margin-top: 0.75rem; }
 
-    /* NOTE */
-    .note {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      margin-top: 1rem;
-      padding-top: 0.75rem;
-      border-top: 0.5px solid var(--border);
-      line-height: 1.6;
-    }
+  .note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 0.5px solid var(--border);
+    line-height: 1.6;
+  }
 
-    /* FOOTER */
-    footer {
-      margin-top: 4rem;
-      padding-top: 1.5rem;
-      border-top: 0.5px solid var(--border-md);
-      font-size: 12px;
-      color: var(--text-tertiary);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-  </style>
+  /* Icons using unicode fallback since no CDN */
+  .icon::before { display: inline-block; width: 22px; text-align: center; }
+</style>
 </head>
 <body>
 <div class="site">
 
   <div class="hero">
-    <div class="hero-left">
-      <div class="hero-label">Контрактное производство косметики</div>
-      <h1>Прайс-лист</h1>
-      <p>Производство под вашим брендом — фулфилмент и логистика</p>
-    </div>
-    <div class="hero-contact">
-      <div>info@yourcompany.ru</div>
-      <div>+7 (XXX) XXX-XX-XX</div>
-      <div>yourcompany.ru</div>
-    </div>
+    <div class="hero-label">Контрактное производство</div>
+    <h1>Прайс-лист</h1>
+    <p>Производство косметики под вашим брендом — фулфилмент и логистика</p>
   </div>
 
   <!-- 01 ПРОДУКТЫ -->
@@ -307,200 +181,246 @@
 
     <!-- ЛУБРИКАНТ -->
     <div class="tab-panel active" id="tab-lubricant">
-      <div class="table-wrap"><div class="price-table-scroll">
+      <div class="price-table-wrap">
         <table>
-          <thead><tr>
-            <th style="width:60px"></th>
-            <th>Название продукта</th>
-            <th class="r">от 1 000 шт.</th>
-            <th class="r">от 5 000 шт.</th>
-            <th class="r">от 10 000 шт.</th>
-            <th>Тара</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th style="width:60px"></th>
+              <th>Название продукта</th>
+              <th class="price-col" style="width:110px">от 1 000 шт.</th>
+              <th class="price-col" style="width:110px">от 5 000 шт.</th>
+              <th class="price-col" style="width:110px">от 10 000 шт.</th>
+              <th style="width:140px">Тара</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet"></i></div></td>
-              <td>Лубрикант водный классический<span class="tag tag-pop">Хит</span></td>
-              <td class="r"><strong>185 ₽</strong></td><td class="r">160 ₽</td><td class="r">140 ₽</td>
+              <td><div class="photo-thumb">💧</div></td>
+              <td>Лубрикант водный классический <span class="tag tag-pop">Хит</span></td>
+              <td class="price-cell"><strong>185 ₽</strong></td>
+              <td class="price-cell">160 ₽</td>
+              <td class="price-cell">140 ₽</td>
               <td><span class="pkg-badge">Флакон 100 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet"></i></div></td>
+              <td><div class="photo-thumb">💧</div></td>
               <td>Лубрикант водный с алоэ вера</td>
-              <td class="r"><strong>195 ₽</strong></td><td class="r">168 ₽</td><td class="r">148 ₽</td>
+              <td class="price-cell"><strong>195 ₽</strong></td>
+              <td class="price-cell">168 ₽</td>
+              <td class="price-cell">148 ₽</td>
               <td><span class="pkg-badge">Флакон 100 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet"></i></div></td>
+              <td><div class="photo-thumb">💧</div></td>
               <td>Лубрикант силиконовый длительного действия</td>
-              <td class="r"><strong>220 ₽</strong></td><td class="r">195 ₽</td><td class="r">172 ₽</td>
+              <td class="price-cell"><strong>220 ₽</strong></td>
+              <td class="price-cell">195 ₽</td>
+              <td class="price-cell">172 ₽</td>
               <td><span class="pkg-badge">Флакон 150 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet"></i></div></td>
-              <td>Лубрикант гибридный<span class="tag tag-new">Новинка</span></td>
-              <td class="r"><strong>240 ₽</strong></td><td class="r">210 ₽</td><td class="r">185 ₽</td>
+              <td><div class="photo-thumb">💧</div></td>
+              <td>Лубрикант гибридный <span class="tag tag-new">Новинка</span></td>
+              <td class="price-cell"><strong>240 ₽</strong></td>
+              <td class="price-cell">210 ₽</td>
+              <td class="price-cell">185 ₽</td>
               <td><span class="pkg-badge">Туба 80 мл</span></td>
             </tr>
           </tbody>
         </table>
-      </div></div>
+      </div>
     </div>
 
     <!-- ГИДРОФИЛЬНОЕ МАСЛО -->
     <div class="tab-panel" id="tab-hydro-oil">
-      <div class="table-wrap"><div class="price-table-scroll">
+      <div class="price-table-wrap">
         <table>
-          <thead><tr>
-            <th style="width:60px"></th>
-            <th>Название продукта</th>
-            <th class="r">от 1 000 шт.</th>
-            <th class="r">от 5 000 шт.</th>
-            <th class="r">от 10 000 шт.</th>
-            <th>Тара</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th style="width:60px"></th>
+              <th>Название продукта</th>
+              <th class="price-col" style="width:110px">от 1 000 шт.</th>
+              <th class="price-col" style="width:110px">от 5 000 шт.</th>
+              <th class="price-col" style="width:110px">от 10 000 шт.</th>
+              <th style="width:140px">Тара</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-flask"></i></div></td>
-              <td>Гидрофильное масло классическое<span class="tag tag-pop">Хит</span></td>
-              <td class="r"><strong>210 ₽</strong></td><td class="r">180 ₽</td><td class="r">158 ₽</td>
+              <td><div class="photo-thumb">🧴</div></td>
+              <td>Гидрофильное масло классическое <span class="tag tag-pop">Хит</span></td>
+              <td class="price-cell"><strong>210 ₽</strong></td>
+              <td class="price-cell">180 ₽</td>
+              <td class="price-cell">158 ₽</td>
               <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-flask"></i></div></td>
+              <td><div class="photo-thumb">🧴</div></td>
               <td>Гидрофильное масло с экстрактом ромашки</td>
-              <td class="r"><strong>225 ₽</strong></td><td class="r">195 ₽</td><td class="r">170 ₽</td>
+              <td class="price-cell"><strong>225 ₽</strong></td>
+              <td class="price-cell">195 ₽</td>
+              <td class="price-cell">170 ₽</td>
               <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-flask"></i></div></td>
+              <td><div class="photo-thumb">🧴</div></td>
               <td>Гидрофильное масло для чувствительной кожи</td>
-              <td class="r"><strong>235 ₽</strong></td><td class="r">205 ₽</td><td class="r">178 ₽</td>
+              <td class="price-cell"><strong>235 ₽</strong></td>
+              <td class="price-cell">205 ₽</td>
+              <td class="price-cell">178 ₽</td>
               <td><span class="pkg-badge">Флакон 200 мл</span></td>
             </tr>
           </tbody>
         </table>
-      </div></div>
+      </div>
     </div>
 
     <!-- ГИДРОФИЛЬНЫЙ БАЛЬЗАМ -->
     <div class="tab-panel" id="tab-hydro-balm">
-      <div class="table-wrap"><div class="price-table-scroll">
+      <div class="price-table-wrap">
         <table>
-          <thead><tr>
-            <th style="width:60px"></th>
-            <th>Название продукта</th>
-            <th class="r">от 1 000 шт.</th>
-            <th class="r">от 5 000 шт.</th>
-            <th class="r">от 10 000 шт.</th>
-            <th>Тара</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th style="width:60px"></th>
+              <th>Название продукта</th>
+              <th class="price-col" style="width:110px">от 1 000 шт.</th>
+              <th class="price-col" style="width:110px">от 5 000 шт.</th>
+              <th class="price-col" style="width:110px">от 10 000 шт.</th>
+              <th style="width:140px">Тара</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet-half-2"></i></div></td>
-              <td>Гидрофильный бальзам для губ<span class="tag tag-pop">Хит</span></td>
-              <td class="r"><strong>145 ₽</strong></td><td class="r">125 ₽</td><td class="r">108 ₽</td>
+              <td><div class="photo-thumb">💊</div></td>
+              <td>Гидрофильный бальзам для губ <span class="tag tag-pop">Хит</span></td>
+              <td class="price-cell"><strong>145 ₽</strong></td>
+              <td class="price-cell">125 ₽</td>
+              <td class="price-cell">108 ₽</td>
               <td><span class="pkg-badge">Стик 10 г</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet-half-2"></i></div></td>
+              <td><div class="photo-thumb">💊</div></td>
               <td>Гидрофильный бальзам с SPF 30</td>
-              <td class="r"><strong>175 ₽</strong></td><td class="r">150 ₽</td><td class="r">132 ₽</td>
+              <td class="price-cell"><strong>175 ₽</strong></td>
+              <td class="price-cell">150 ₽</td>
+              <td class="price-cell">132 ₽</td>
               <td><span class="pkg-badge">Стик 10 г</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-droplet-half-2"></i></div></td>
-              <td>Бальзам для тела очищающий<span class="tag tag-new">Новинка</span></td>
-              <td class="r"><strong>260 ₽</strong></td><td class="r">228 ₽</td><td class="r">200 ₽</td>
+              <td><div class="photo-thumb">💊</div></td>
+              <td>Бальзам для тела очищающий <span class="tag tag-new">Новинка</span></td>
+              <td class="price-cell"><strong>260 ₽</strong></td>
+              <td class="price-cell">228 ₽</td>
+              <td class="price-cell">200 ₽</td>
               <td><span class="pkg-badge">Банка 200 мл</span></td>
             </tr>
           </tbody>
         </table>
-      </div></div>
+      </div>
     </div>
 
     <!-- ПЕНКА -->
     <div class="tab-panel" id="tab-foam">
-      <div class="table-wrap"><div class="price-table-scroll">
+      <div class="price-table-wrap">
         <table>
-          <thead><tr>
-            <th style="width:60px"></th>
-            <th>Название продукта</th>
-            <th class="r">от 1 000 шт.</th>
-            <th class="r">от 5 000 шт.</th>
-            <th class="r">от 10 000 шт.</th>
-            <th>Тара</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th style="width:60px"></th>
+              <th>Название продукта</th>
+              <th class="price-col" style="width:110px">от 1 000 шт.</th>
+              <th class="price-col" style="width:110px">от 5 000 шт.</th>
+              <th class="price-col" style="width:110px">от 10 000 шт.</th>
+              <th style="width:140px">Тара</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-bubble"></i></div></td>
-              <td>Пенка для умывания увлажняющая<span class="tag tag-pop">Хит</span></td>
-              <td class="r"><strong>190 ₽</strong></td><td class="r">165 ₽</td><td class="r">145 ₽</td>
+              <td><div class="photo-thumb">🫧</div></td>
+              <td>Пенка для умывания увлажняющая <span class="tag tag-pop">Хит</span></td>
+              <td class="price-cell"><strong>190 ₽</strong></td>
+              <td class="price-cell">165 ₽</td>
+              <td class="price-cell">145 ₽</td>
               <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-bubble"></i></div></td>
+              <td><div class="photo-thumb">🫧</div></td>
               <td>Пенка для умывания с кислотами</td>
-              <td class="r"><strong>215 ₽</strong></td><td class="r">185 ₽</td><td class="r">163 ₽</td>
+              <td class="price-cell"><strong>215 ₽</strong></td>
+              <td class="price-cell">185 ₽</td>
+              <td class="price-cell">163 ₽</td>
               <td><span class="pkg-badge">Флакон-помпа 150 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-bubble"></i></div></td>
+              <td><div class="photo-thumb">🫧</div></td>
               <td>Пенка для умывания для чувствительной кожи</td>
-              <td class="r"><strong>205 ₽</strong></td><td class="r">178 ₽</td><td class="r">155 ₽</td>
+              <td class="price-cell"><strong>205 ₽</strong></td>
+              <td class="price-cell">178 ₽</td>
+              <td class="price-cell">155 ₽</td>
               <td><span class="pkg-badge">Флакон-помпа 100 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-bubble"></i></div></td>
-              <td>Пенка очищающая с niacinamide<span class="tag tag-new">Новинка</span></td>
-              <td class="r"><strong>230 ₽</strong></td><td class="r">200 ₽</td><td class="r">175 ₽</td>
+              <td><div class="photo-thumb">🫧</div></td>
+              <td>Пенка очищающая с niacinamide <span class="tag tag-new">Новинка</span></td>
+              <td class="price-cell"><strong>230 ₽</strong></td>
+              <td class="price-cell">200 ₽</td>
+              <td class="price-cell">175 ₽</td>
               <td><span class="pkg-badge">Флакон-помпа 200 мл</span></td>
             </tr>
           </tbody>
         </table>
-      </div></div>
+      </div>
     </div>
 
     <!-- СПРЕЙ -->
     <div class="tab-panel" id="tab-spray">
-      <div class="table-wrap"><div class="price-table-scroll">
+      <div class="price-table-wrap">
         <table>
-          <thead><tr>
-            <th style="width:60px"></th>
-            <th>Название продукта</th>
-            <th class="r">от 1 000 шт.</th>
-            <th class="r">от 5 000 шт.</th>
-            <th class="r">от 10 000 шт.</th>
-            <th>Тара</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th style="width:60px"></th>
+              <th>Название продукта</th>
+              <th class="price-col" style="width:110px">от 1 000 шт.</th>
+              <th class="price-col" style="width:110px">от 5 000 шт.</th>
+              <th class="price-col" style="width:110px">от 10 000 шт.</th>
+              <th style="width:140px">Тара</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-spray"></i></div></td>
-              <td>Спрей для волос термозащита<span class="tag tag-pop">Хит</span></td>
-              <td class="r"><strong>175 ₽</strong></td><td class="r">150 ₽</td><td class="r">132 ₽</td>
+              <td><div class="photo-thumb">💨</div></td>
+              <td>Спрей для волос термозащита <span class="tag tag-pop">Хит</span></td>
+              <td class="price-cell"><strong>175 ₽</strong></td>
+              <td class="price-cell">150 ₽</td>
+              <td class="price-cell">132 ₽</td>
               <td><span class="pkg-badge">Спрей 200 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-spray"></i></div></td>
+              <td><div class="photo-thumb">💨</div></td>
               <td>Спрей-кондиционер несмываемый</td>
-              <td class="r"><strong>195 ₽</strong></td><td class="r">168 ₽</td><td class="r">148 ₽</td>
+              <td class="price-cell"><strong>195 ₽</strong></td>
+              <td class="price-cell">168 ₽</td>
+              <td class="price-cell">148 ₽</td>
               <td><span class="pkg-badge">Спрей 250 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-spray"></i></div></td>
-              <td>Спрей для объёма у корней<span class="tag tag-new">Новинка</span></td>
-              <td class="r"><strong>188 ₽</strong></td><td class="r">162 ₽</td><td class="r">142 ₽</td>
+              <td><div class="photo-thumb">💨</div></td>
+              <td>Спрей для объёма у корней <span class="tag tag-new">Новинка</span></td>
+              <td class="price-cell"><strong>188 ₽</strong></td>
+              <td class="price-cell">162 ₽</td>
+              <td class="price-cell">142 ₽</td>
               <td><span class="pkg-badge">Спрей 150 мл</span></td>
             </tr>
             <tr>
-              <td><div class="photo-thumb"><i class="ti ti-spray"></i></div></td>
+              <td><div class="photo-thumb">💨</div></td>
               <td>Спрей для блеска и гладкости</td>
-              <td class="r"><strong>185 ₽</strong></td><td class="r">158 ₽</td><td class="r">138 ₽</td>
+              <td class="price-cell"><strong>185 ₽</strong></td>
+              <td class="price-cell">158 ₽</td>
+              <td class="price-cell">138 ₽</td>
               <td><span class="pkg-badge">Спрей 200 мл</span></td>
             </tr>
           </tbody>
         </table>
-      </div></div>
+      </div>
     </div>
 
     <p class="note">* Цены указаны без НДС. В стоимость включены: состав, производство, этикетка. Упаковка оплачивается отдельно.</p>
@@ -512,45 +432,45 @@
       <span class="section-num">02</span>
       <span class="section-title">Фулфилмент</span>
     </div>
-    <div class="ff-grid">
+    <div class="fulfillment-grid">
       <div class="ff-card">
-        <div class="ff-icon"><i class="ti ti-package"></i></div>
-        <div class="ff-title">Приёмка и хранение</div>
-        <div class="ff-desc">Приём товара, проверка качества, размещение на складе с адресным хранением</div>
+        <div class="ff-card-icon">📦</div>
+        <div class="ff-card-title">Приёмка и хранение</div>
+        <div class="ff-card-desc">Приём товара, проверка качества, размещение на складе с адресным хранением</div>
         <div class="ff-price">от 8 ₽ / ед. в мес.</div>
       </div>
       <div class="ff-card">
-        <div class="ff-icon"><i class="ti ti-tags"></i></div>
-        <div class="ff-title">Маркировка и стикеровка</div>
-        <div class="ff-desc">Нанесение штрихкодов, честного знака (CRPT), артикулов маркетплейсов</div>
+        <div class="ff-card-icon">🏷️</div>
+        <div class="ff-card-title">Маркировка и стикеровка</div>
+        <div class="ff-card-desc">Нанесение штрихкодов, честного знака (CRPT), артикулов маркетплейсов</div>
         <div class="ff-price">от 4 ₽ / ед.</div>
       </div>
       <div class="ff-card">
-        <div class="ff-icon"><i class="ti ti-box"></i></div>
-        <div class="ff-title">Упаковка и комплектация</div>
-        <div class="ff-desc">Сборка заказов, упаковка в коробки, стрейч-плёнку, термопакеты. Формирование наборов</div>
+        <div class="ff-card-icon">🗃️</div>
+        <div class="ff-card-title">Упаковка и комплектация</div>
+        <div class="ff-card-desc">Сборка заказов, упаковка в коробки, стрейч-плёнку, термопакеты. Формирование наборов</div>
         <div class="ff-price">от 12 ₽ / ед.</div>
       </div>
       <div class="ff-card">
-        <div class="ff-icon"><i class="ti ti-building-store"></i></div>
-        <div class="ff-title">Отгрузка на маркетплейсы</div>
-        <div class="ff-desc">Подготовка поставок на Wildberries, Ozon, Яндекс Маркет: документы, паллетирование, сдача</div>
+        <div class="ff-card-icon">🏪</div>
+        <div class="ff-card-title">Отгрузка на маркетплейсы</div>
+        <div class="ff-card-desc">Подготовка поставок на Wildberries, Ozon, Яндекс Маркет: документы, паллетирование, сдача</div>
         <div class="ff-price">от 18 ₽ / ед.</div>
       </div>
       <div class="ff-card">
-        <div class="ff-icon"><i class="ti ti-rotate"></i></div>
-        <div class="ff-title">Обработка возвратов</div>
-        <div class="ff-desc">Приёмка, сортировка и переупаковка возвратов от покупателей и маркетплейсов</div>
+        <div class="ff-card-icon">↩️</div>
+        <div class="ff-card-title">Обработка возвратов</div>
+        <div class="ff-card-desc">Приёмка, сортировка и переупаковка возвратов от покупателей и маркетплейсов</div>
         <div class="ff-price">от 25 ₽ / ед.</div>
       </div>
       <div class="ff-card">
-        <div class="ff-icon"><i class="ti ti-certificate"></i></div>
-        <div class="ff-title">Декларирование и сертификация</div>
-        <div class="ff-desc">Помощь в оформлении деклараций соответствия, нотификаций и разрешительной документации</div>
+        <div class="ff-card-icon">📋</div>
+        <div class="ff-card-title">Декларирование и сертификация</div>
+        <div class="ff-card-desc">Помощь в оформлении деклараций соответствия, нотификаций и разрешительной документации</div>
         <div class="ff-price">по запросу</div>
       </div>
     </div>
-    <p class="note">* Минимальный объём — 500 ед. в месяц. При объёме свыше 10 000 ед./мес. предоставляется индивидуальное КП.</p>
+    <p class="note">* Минимальный объём — 500 ед. в месяц. При объёме свыше 10 000 ед./мес. предоставляется индивидуальное коммерческое предложение.</p>
   </div>
 
   <!-- 03 ЛОГИСТИКА -->
@@ -559,68 +479,65 @@
       <span class="section-num">03</span>
       <span class="section-title">Логистика</span>
     </div>
-    <div class="table-wrap"><div class="price-table-scroll">
+    <div class="price-table-wrap">
       <table style="table-layout:auto;">
-        <thead><tr>
-          <th>Направление</th>
-          <th>Способ</th>
-          <th>Срок</th>
-          <th class="r">Стоимость</th>
-          <th>Условие</th>
-        </tr></thead>
+        <thead>
+          <tr>
+            <th>Направление</th>
+            <th>Способ</th>
+            <th>Срок</th>
+            <th class="price-col">Стоимость</th>
+            <th>Условие</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td>Москва и МО</td>
             <td>Курьер до двери</td>
             <td>1–2 дня</td>
-            <td class="r"><strong>350 ₽</strong></td>
+            <td class="price-cell"><strong>350 ₽</strong></td>
             <td><span class="pkg-badge">до 30 кг</span></td>
           </tr>
           <tr>
             <td>Москва и МО</td>
             <td>Самовывоз со склада</td>
             <td>—</td>
-            <td class="r"><strong>Бесплатно</strong></td>
+            <td class="price-cell"><strong>Бесплатно</strong></td>
             <td><span class="pkg-badge">любой объём</span></td>
           </tr>
           <tr>
             <td>Россия (регионы)</td>
             <td>СДЭК / Boxberry</td>
             <td>3–7 дней</td>
-            <td class="r"><strong>от 450 ₽</strong></td>
+            <td class="price-cell"><strong>от 450 ₽</strong></td>
             <td><span class="pkg-badge">до 30 кг</span></td>
           </tr>
           <tr>
             <td>Россия (регионы)</td>
             <td>Транспортная компания</td>
             <td>5–14 дней</td>
-            <td class="r"><strong>по тарифу ТК</strong></td>
+            <td class="price-cell"><strong>по тарифу ТК</strong></td>
             <td><span class="pkg-badge">паллеты / борт</span></td>
           </tr>
           <tr>
             <td>WB / Ozon / ЯМ</td>
             <td>Прямая поставка на склад МП</td>
             <td>2–5 дней</td>
-            <td class="r"><strong>от 2 500 ₽</strong></td>
+            <td class="price-cell"><strong>от 2 500 ₽</strong></td>
             <td><span class="pkg-badge">за поставку</span></td>
           </tr>
           <tr>
             <td>Казахстан / Беларусь</td>
             <td>Международная доставка</td>
             <td>7–14 дней</td>
-            <td class="r"><strong>по запросу</strong></td>
+            <td class="price-cell"><strong>по запросу</strong></td>
             <td><span class="pkg-badge">от 1 000 ед.</span></td>
           </tr>
         </tbody>
       </table>
-    </div></div>
-    <p class="note">* Сроки и стоимость могут варьироваться в зависимости от веса, габаритов и удалённости региона.</p>
+    </div>
+    <p class="note">* Сроки и стоимость доставки могут варьироваться в зависимости от веса, габаритов и удалённости региона.</p>
   </div>
-
-  <footer>
-    <span>© 2025 Контрактное производство косметики</span>
-    <span>Цены актуальны на дату выпуска прайс-листа</span>
-  </footer>
 
 </div>
 
