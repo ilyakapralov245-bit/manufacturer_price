@@ -201,7 +201,7 @@
 </div>
 
 <script>
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwLFz20fXF8iNfq7JjAhTWZq1UgEXKvwZVJs4LM92E_gk_yx3X1IMLlhb6H2NFGvgTFM_bdeq3ZRY0/pub?output=csv';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSx9GS3K991T2KZ7uQhWAAIHFqJrseB3wow3d_dsY5dlhe-X--irFjmeGOAUtpX-l6V5sGN9RnAssOG/pub?output=csv';
 
 const ICONS = {
   'Лубрикант': '💧',
@@ -249,19 +249,21 @@ function buildProductTable(rows, category) {
     <thead><tr>
       <th style="width:60px"></th>
       <th>Название продукта</th>
+      <th style="width:100px">Объём</th>
       <th class="price-col" style="width:110px">от 1 000 шт.</th>
       <th class="price-col" style="width:110px">от 5 000 шт.</th>
       <th class="price-col" style="width:110px">от 10 000 шт.</th>
-      <th style="width:140px">Тара</th>
+      <th style="width:120px">Тара</th>
     </tr></thead><tbody>`;
 
   rows.forEach(r => {
     const name = r[2] || '';
-    const p1 = formatPrice(r[3]);
-    const p2 = formatPrice(r[4]);
-    const p3 = formatPrice(r[5]);
-    const pkg = r[6] || '';
-    const badge = (r[7] || '').trim();
+    const volume = r[3] || '';
+    const p1 = formatPrice(r[4]);
+    const p2 = formatPrice(r[5]);
+    const p3 = formatPrice(r[6]);
+    const pkg = r[7] || '';
+    const badge = (r[8] || '').trim();
     let badgeHtml = '';
     if (badge === 'Хит') badgeHtml = '<span class="tag tag-pop">Хит</span>';
     if (badge === 'Новинка') badgeHtml = '<span class="tag tag-new">Новинка</span>';
@@ -269,6 +271,7 @@ function buildProductTable(rows, category) {
     html += `<tr>
       <td><div class="photo-thumb">${icon}</div></td>
       <td>${name}${badgeHtml}</td>
+      <td><span class="pkg-badge">${volume}</span></td>
       <td class="price-cell"><strong>${p1}</strong></td>
       <td class="price-cell">${p2}</td>
       <td class="price-cell">${p3}</td>
