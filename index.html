@@ -92,7 +92,7 @@
   td { padding: 14px 12px; vertical-align: middle; }
   td.price-cell { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
   td.price-cell strong { color: var(--text); font-weight: 500; }
-  tbody tr { border-bottom: 0.5px solid var(--border); transition: background 0.1s; }
+  tbody tr { border-bottom: 0.5px solid var(--border); transition: background 0.1s; cursor: pointer; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: var(--bg-secondary); }
 
@@ -233,6 +233,25 @@
     padding: 0.5rem 0 0.25rem;
   }
   .cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .row-tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, -140%) scale(0.9);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    z-index: 50;
+  }
+  .row-tooltip.visible { opacity: 1; transform: translate(-50%, -140%) scale(1); }
 </style>
 </head>
 <body>
@@ -252,6 +271,7 @@
     </div>
     <div class="tabs" id="tabs"></div>
     <div id="products-container"><div class="loading">Загрузка данных...</div></div>
+    <div class="row-tooltip" id="rowTooltip">Заказать</div>
     <p class="note">* Представленные цены являются примерными. Цены указаны с НДС 5%. В стоимость включены: тара, этикетка, сырьё, замешивание, розлив, этикетирование</p>
     <button class="cta-btn" id="openOrderModal">Оставить заявку</button>
   </div>
@@ -260,10 +280,11 @@
   <div class="modal-overlay" id="orderModalOverlay">
     <div class="modal-box">
       <div class="modal-header">
-        <span class="modal-title">Оставить заявку</span>
+        <span class="modal-title" id="modalTitleText">Оставить заявку</span>
         <button class="modal-close" id="closeOrderModal">✕</button>
       </div>
       <div class="modal-body" id="orderFormView">
+        <input type="hidden" id="orderProduct" value="">
         <label class="field-label">Ваше имя</label>
         <input type="text" class="field-input" id="orderName" placeholder="Иван Иванов">
 
@@ -368,7 +389,7 @@ function buildProductTable(rows, category) {
     if (badge === 'Хит') badgeHtml = '<span class="tag tag-pop">Хит</span>';
     if (badge === 'Новинка') badgeHtml = '<span class="tag tag-new">Новинка</span>';
 
-    html += `<tr>
+    html += `<tr data-product-name="${name}" data-category="${category}">
       <td><div class="photo-thumb">${icon}</div></td>
       <td>${name}${badgeHtml}</td>
       <td><span class="pkg-badge">${volume}</span></td>
@@ -465,11 +486,15 @@ const submitOrder = document.getElementById('submitOrder');
 const closeSuccessBtn = document.getElementById('closeSuccessBtn');
 const orderFormView = document.getElementById('orderFormView');
 const orderSuccessView = document.getElementById('orderSuccessView');
+const modalTitleText = document.getElementById('modalTitleText');
+const orderProductField = document.getElementById('orderProduct');
 
 function resetOrderModal() {
   document.getElementById('orderName').value = '';
   document.getElementById('orderPhone').value = '';
   document.getElementById('orderComment').value = '';
+  orderProductField.value = '';
+  modalTitleText.textContent = 'Оставить заявку';
   orderFormView.style.display = 'block';
   orderSuccessView.style.display = 'none';
   submitOrder.disabled = false;
@@ -485,7 +510,67 @@ function hideOrderModal() {
   setTimeout(resetOrderModal, 200); // сброс после закрытия анимации
 }
 
-openOrderModal.addEventListener('click', showOrderModal);
+openOrderModal.addEventListener('click', () => {
+  orderProductField.value = '';
+  modalTitleText.textContent = 'Оставить заявку';
+  showOrderModal();
+});
+
+// Открытие формы при клике на строку продукта
+document.getElementById('products-container').addEventListener('click', (e) => {
+  const row = e.target.closest('tr[data-product-name]');
+  if (!row) return;
+  const productName = row.dataset.productName;
+  const category = row.dataset.category;
+  orderProductField.value = productName;
+  modalTitleText.textContent = `Оставьте заявку на ${category}`;
+  showOrderModal();
+});
+
+// Подсказка "Заказать" рядом с курсором/пальцем при наведении на строку продукта
+const rowTooltip = document.getElementById('rowTooltip');
+const productsContainer = document.getElementById('products-container');
+
+function moveTooltip(x, y) {
+  rowTooltip.style.left = x + 'px';
+  rowTooltip.style.top = y + 'px';
+}
+
+productsContainer.addEventListener('mousemove', (e) => {
+  const row = e.target.closest('tr[data-product-name]');
+  if (row) {
+    moveTooltip(e.clientX, e.clientY);
+    rowTooltip.classList.add('visible');
+  } else {
+    rowTooltip.classList.remove('visible');
+  }
+});
+productsContainer.addEventListener('mouseleave', () => {
+  rowTooltip.classList.remove('visible');
+});
+
+productsContainer.addEventListener('touchstart', (e) => {
+  const row = e.target.closest('tr[data-product-name]');
+  if (!row) return;
+  const touch = e.touches[0];
+  moveTooltip(touch.clientX, touch.clientY);
+  rowTooltip.classList.add('visible');
+}, { passive: true });
+productsContainer.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const row = el ? el.closest('tr[data-product-name]') : null;
+  if (row) {
+    moveTooltip(touch.clientX, touch.clientY);
+    rowTooltip.classList.add('visible');
+  } else {
+    rowTooltip.classList.remove('visible');
+  }
+}, { passive: true });
+productsContainer.addEventListener('touchend', () => {
+  rowTooltip.classList.remove('visible');
+});
+
 closeOrderModal.addEventListener('click', hideOrderModal);
 closeSuccessBtn.addEventListener('click', hideOrderModal);
 
@@ -505,6 +590,7 @@ submitOrder.addEventListener('click', async () => {
   const name = document.getElementById('orderName').value.trim();
   const phone = document.getElementById('orderPhone').value.trim();
   const comment = document.getElementById('orderComment').value.trim();
+  const product = orderProductField.value.trim();
 
   if (!name || !phone) {
     alert('Пожалуйста, заполните имя и телефон');
@@ -527,7 +613,8 @@ submitOrder.addEventListener('click', async () => {
         _subject: subject,
         'Ваше имя': name,
         'Ваш телефон': phone,
-        'Комментарий': comment
+        'Комментарий': comment,
+        'Название продукта': product
       })
     });
 
