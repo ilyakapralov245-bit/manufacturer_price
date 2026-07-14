@@ -156,13 +156,90 @@
     color: var(--text-tertiary);
     font-size: 13px;
   }
+
+  .cta-btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--text);
+    color: var(--bg);
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: opacity 0.15s;
+  }
+  .cta-btn:hover { opacity: 0.85; }
+  .cta-btn-full { width: 100%; margin-top: 1.5rem; }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 400px;
+    padding: 1.5rem;
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+  .modal-title { font-size: 18px; font-weight: 500; }
+  .modal-close {
+    border: none;
+    background: none;
+    font-size: 16px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+  }
+  .field-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+    margin-top: 0.9rem;
+  }
+  .field-label:first-of-type { margin-top: 0; }
+  .field-input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-secondary);
+    background: var(--bg-secondary);
+    color: var(--text);
+  }
+  .field-input:focus { outline: 1px solid var(--text); }
+  .field-textarea { resize: vertical; min-height: 70px; font-family: inherit; }
+  .success-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0.5rem 0 0.25rem;
+  }
+  .cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 </style>
 </head>
 <body>
 <div class="site">
 
   <div class="hero">
-    <div class="hero-label">Контрактное производство</div>
+    <div class="hero-label">Контрактное производство Etalon Cosmetics</div>
     <h1>Прайс-лист</h1>
     <p>Производство косметики под вашим брендом — фулфилмент под ключ</p>
   </div>
@@ -176,6 +253,33 @@
     <div class="tabs" id="tabs"></div>
     <div id="products-container"><div class="loading">Загрузка данных...</div></div>
     <p class="note">* Представленные цены являются примерными. Цены указаны с НДС 5%. В стоимость включены: тара, этикетка, сырьё, замешивание, розлив, этикетирование</p>
+    <button class="cta-btn" id="openOrderModal">Оставить заявку</button>
+  </div>
+
+  <!-- Order Modal -->
+  <div class="modal-overlay" id="orderModalOverlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">Оставить заявку</span>
+        <button class="modal-close" id="closeOrderModal">✕</button>
+      </div>
+      <div class="modal-body" id="orderFormView">
+        <label class="field-label">Ваше имя</label>
+        <input type="text" class="field-input" id="orderName" placeholder="Иван Иванов">
+
+        <label class="field-label">Ваш телефон</label>
+        <input type="tel" class="field-input" id="orderPhone" placeholder="+7 900 000-00-00">
+
+        <label class="field-label">Комментарий</label>
+        <textarea class="field-input field-textarea" id="orderComment" placeholder="Опишите, что вас интересует"></textarea>
+
+        <button class="cta-btn cta-btn-full" id="submitOrder">Заказать</button>
+      </div>
+      <div class="modal-body" id="orderSuccessView" style="display:none;">
+        <p class="success-text">Спасибо, заявка отправлена, оператор свяжется с Вами в ближайшее время</p>
+        <button class="cta-btn cta-btn-full" id="closeSuccessBtn">Закрыть</button>
+      </div>
+    </div>
   </div>
 
   <!-- 02 ФУЛФИЛМЕНТ -->
@@ -268,10 +372,10 @@ function buildProductTable(rows, category) {
       <td><div class="photo-thumb">${icon}</div></td>
       <td>${name}${badgeHtml}</td>
       <td><span class="pkg-badge">${volume}</span></td>
-      <td class="price-cell"><strong>${p1}</strong></td>
+      <td class="price-cell">${p1}</td>
       <td class="price-cell">${p2}</td>
       <td class="price-cell">${p3}</td>
-      <td class="price-cell">${p4}</td>
+      <td class="price-cell"><strong>${p4}</strong></td>
       <td><span class="pkg-badge">${pkg}</span></td>
     </tr>`;
   });
@@ -350,6 +454,96 @@ async function loadData() {
 }
 
 loadData();
+
+// Order modal logic
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwvgpqyr';
+
+const orderModalOverlay = document.getElementById('orderModalOverlay');
+const openOrderModal = document.getElementById('openOrderModal');
+const closeOrderModal = document.getElementById('closeOrderModal');
+const submitOrder = document.getElementById('submitOrder');
+const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+const orderFormView = document.getElementById('orderFormView');
+const orderSuccessView = document.getElementById('orderSuccessView');
+
+function resetOrderModal() {
+  document.getElementById('orderName').value = '';
+  document.getElementById('orderPhone').value = '';
+  document.getElementById('orderComment').value = '';
+  orderFormView.style.display = 'block';
+  orderSuccessView.style.display = 'none';
+  submitOrder.disabled = false;
+  submitOrder.textContent = 'Заказать';
+}
+
+function showOrderModal() {
+  orderModalOverlay.classList.add('active');
+}
+
+function hideOrderModal() {
+  orderModalOverlay.classList.remove('active');
+  setTimeout(resetOrderModal, 200); // сброс после закрытия анимации
+}
+
+openOrderModal.addEventListener('click', showOrderModal);
+closeOrderModal.addEventListener('click', hideOrderModal);
+closeSuccessBtn.addEventListener('click', hideOrderModal);
+
+// Закрытие по клику вне окна
+orderModalOverlay.addEventListener('click', (e) => {
+  if (e.target === orderModalOverlay) hideOrderModal();
+});
+
+// Закрытие по Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && orderModalOverlay.classList.contains('active')) hideOrderModal();
+});
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+submitOrder.addEventListener('click', async () => {
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const comment = document.getElementById('orderComment').value.trim();
+
+  if (!name || !phone) {
+    alert('Пожалуйста, заполните имя и телефон');
+    return;
+  }
+
+  const now = new Date();
+  const dateStr = `${pad(now.getDate())}.${pad(now.getMonth()+1)}.${now.getFullYear()}`;
+  const timeStr = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  const subject = `Заявка с сайта Etalon Cosmetics от ${dateStr} ${timeStr}`;
+
+  submitOrder.disabled = true;
+  submitOrder.textContent = 'Отправка...';
+
+  try {
+    const resp = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: subject,
+        'Ваше имя': name,
+        'Ваш телефон': phone,
+        'Комментарий': comment
+      })
+    });
+
+    if (resp.ok) {
+      orderFormView.style.display = 'none';
+      orderSuccessView.style.display = 'block';
+    } else {
+      throw new Error('Formspree error');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Не удалось отправить заявку. Попробуйте позже или свяжитесь с нами напрямую.');
+    submitOrder.disabled = false;
+    submitOrder.textContent = 'Заказать';
+  }
+});
 </script>
 </body>
 </html>
